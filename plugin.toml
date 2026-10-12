@@ -33,3 +33,16 @@ UN_WEBSERVER_LISTEN_ADDR = "0.0.0.0:5656"
 UN_SONARR_0_URL          = { url_of = "library.curate", files = "tv", native = "servarr" }
 UN_RADARR_0_URL          = { url_of = "library.curate", files = "movies", native = "servarr" }
 UN_LIDARR_0_URL          = { url_of = "library.curate", files = "music", native = "servarr" }
+
+[[proof]]
+id      = "unpackerr.metrics"
+title   = "Unpackerr answers its metrics in Prometheus's text format"
+request = { method = "GET", path = "/metrics" }
+expect  = { status = 200, content_type = "text/plain; version=0.0.4", body_starts_with = "# HELP go_gc_duration_seconds" }
+fixture = "recordings/unpackerr/metrics.json"
+why     = """
+Unpackerr answers nothing else over HTTP. Its metrics server, turned on by
+its declaration, is the one place it says anything about its work, and the
+exposition format is what says the answer is Unpackerr's and not an empty
+port.
+"""
