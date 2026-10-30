@@ -26,10 +26,15 @@ pub const RELEASE: &str = "release-0.15.2";
 /// The digest of the image that release's recordings were taken from.
 pub const DIGEST: &str = "sha256:724c702e81727e3d90c42cf2b3d900674203906a6d135ba07416c9a3f9f67fbb";
 
-/// The SHA-256 of `/app/unpackerr.conf.example` in the image [`DIGEST`] names, which
-/// the image copies to `/config/unpackerr.conf` where it finds none: the one
-/// configuration the adapter did not write that it takes as nobody's own.
-pub const IMAGE_DEFAULT: &str = "2d53264ae968db01e16267fea09eab17e177ffa67d8f956502c70cd6d0b3ee9e";
+/// The SHA-256 of `/app/unpackerr.conf.example` in each platform's image [`DIGEST`]
+/// names, `linux/amd64` then `linux/arm64`, which the image copies to
+/// `/config/unpackerr.conf` where it finds none: the one configuration the adapter did
+/// not write that it takes as nobody's own. Each platform's image stamps the file with
+/// the time it was generated, so each has its own digest.
+pub const IMAGE_DEFAULTS: [&str; 2] = [
+    "4942565c910c9b48053d54ac9383f23e75c3fe817d3fabde51f8f01e5f57a154",
+    "2d53264ae968db01e16267fea09eab17e177ffa67d8f956502c70cd6d0b3ee9e",
+];
 
 /// Where Unpackerr posts its events.
 #[must_use]

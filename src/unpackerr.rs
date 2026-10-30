@@ -22,7 +22,7 @@ use sha2::{Digest as _, Sha256};
 
 use self::config::{Hook, Refused};
 use self::events::Events;
-use crate::adapter::IMAGE_DEFAULT;
+use crate::adapter::IMAGE_DEFAULTS;
 
 /// What a failure names Unpackerr as.
 const SERVICE: &str = "Unpackerr";
@@ -145,7 +145,8 @@ impl Unpackerr {
         let Some(held) = self.read(CONFIGURATION).await? else {
             return Ok(false);
         };
-        Ok(ours(&held).is_none() && hex::encode(Sha256::digest(held.as_bytes())) != IMAGE_DEFAULT)
+        let digest = hex::encode(Sha256::digest(held.as_bytes()));
+        Ok(ours(&held).is_none() && !IMAGE_DEFAULTS.contains(&digest.as_str()))
     }
 }
 
