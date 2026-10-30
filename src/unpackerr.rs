@@ -186,7 +186,7 @@ impl Extracting for Unpackerr {
 /// Where the operating system gave no randomness.
 fn minted() -> Result<String, getrandom::Error> {
     let mut bytes = [0_u8; TOKEN_BYTES];
-    getrandom::getrandom(&mut bytes)?;
+    getrandom::fill(&mut bytes)?;
     Ok(hex::encode(bytes))
 }
 
