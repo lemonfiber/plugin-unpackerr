@@ -24,11 +24,19 @@ says how the catalogue pins this repository and how lemonfiber carries it.
 
 - **The plugin id is the service's id** (`ARCH-R266`). The container, the
   configuration directory, the settings and the journal keep their names.
-- **One service, speaking no contract**, while the bundle assembles it. It
-  declares `replaces` naming its own id, which is how it takes the id, the port
-  and the hostname the bundle reserves for it (`ARCH-R222`).
-- **Its claims' recordings sit under `recordings/unpackerr/`**, and its starting
+- **Two services: `unpackerr` and `unpackerr-adapter`.** `unpackerr` speaks no
+  contract and declares `replaces` naming its own id, which is how it takes the
+  id, the port and the hostname the bundle reserves for it (`ARCH-R222`).
+  `unpackerr-adapter` fronts it, speaks `archive.extract@1`, provides
+  `archive.extract` and shares Unpackerr's configuration directory at
+  `/unpackerr` (`ARCH-R339`).
+- **Its proofs' recordings sit under `recordings/unpackerr/`**, and its starting
   files, where it has any, under `config/unpackerr/` (`ARCH-R271`).
+- **`conformance/` holds one recording per case of `archive.extract@1`**, written
+  by `lemonfiber plugin record .` at the commit `targets.toml` names, the adapter
+  at the digest `plugin.toml` pins in front of Unpackerr at its pinned digest.
+  Re-record whenever the adapter's answers or Unpackerr's digest change.
+  `tests/conformance.rs` reads every recording with the core's own client.
 - **Every service declares `reaches` and `asks_for`** (`ARCH-R270`).
 - **No Python here.** The reader is spec's `first-party-plugin` workflow's.
 - **No `unwrap`, `expect`, `panic` or indexing** outside tests. The lints in
@@ -54,3 +62,5 @@ says how the catalogue pins this repository and how lemonfiber carries it.
   new image in the same change, moving `RELEASE`, `DIGEST` and the digest of
   each platform's default configuration, `IMAGE_DEFAULTS`, in `src/adapter.rs`
   with it, and committing the `proofs.json` the checks write.
+  `tests/manifest.rs` fails while the adapter's `DIGEST` and the image the
+  manifest runs differ.
