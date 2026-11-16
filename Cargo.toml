@@ -28,6 +28,9 @@ serde_json = "1"
 toml = "1.1"
 tokio = { version = "1", features = ["macros", "net", "rt-multi-thread", "signal", "time"] }
 
+[build-dependencies]
+toml = "1.1"
+
 [dev-dependencies]
 lemonfiber-fixtures = { git = "https://github.com/lemonfiber/lemonfiber", rev = "d5dc170c382d2c7cb542c0f8d6e3fe186ef270c6" }
 tokio = { version = "1", features = ["test-util"] }

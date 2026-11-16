@@ -23,8 +23,7 @@ pub const UPSTREAM: &str = "Unpackerr";
 /// The Unpackerr release this adapter's recordings were taken from.
 pub const RELEASE: &str = "release-0.15.2";
 
-/// The digest of the image that release's recordings were taken from.
-pub const DIGEST: &str = "sha256:724c702e81727e3d90c42cf2b3d900674203906a6d135ba07416c9a3f9f67fbb";
+include!(concat!(env!("OUT_DIR"), "/fronted.rs"));
 
 /// The SHA-256 of `/app/unpackerr.conf.example` in each platform's image [`DIGEST`]
 /// names, `linux/amd64` then `linux/arm64`, which the image copies to
