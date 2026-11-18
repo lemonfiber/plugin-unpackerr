@@ -20,9 +20,6 @@ pub const REACHED_AT: &str = "http://unpackerr-adapter:8080";
 /// The upstream this adapter fronts, as its project names itself.
 pub const UPSTREAM: &str = "Unpackerr";
 
-/// The Unpackerr release this adapter's recordings were taken from.
-pub const RELEASE: &str = "release-0.15.2";
-
 include!(concat!(env!("OUT_DIR"), "/fronted.rs"));
 
 /// The SHA-256 of `/app/unpackerr.conf.example` in each platform's image [`DIGEST`]
